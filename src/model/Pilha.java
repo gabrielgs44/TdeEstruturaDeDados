@@ -25,37 +25,42 @@ public class Pilha {
 
         } else {
             aux = Head.getNext();
-
+            
+            // pecorre a lista encadeada até encontrar um nó com um next como nulo, para adicionar um novo nó.
             while (aux.getNext() != null) {
 
                 aux = aux.getNext();
             }
-
+            
+            // adiciona o nó na ultima posição.
             aux.setNext(newNode);
             return;
         }
     }
-
+    
+    //método retorna o topo da pilha.
     public Aluno top(Pilha pilha) throws VazioException {
 
         Aluno aux = Head;
 
         if (aux == null) {
+            // esse if verifica se a pilha está vazia, caso esteja lançará uma exceção.
             throw new VazioException("A pilha está vázia!");
 
         } else {
-
+            
+            // verifica se o Next do primeiro nó nó está vázio, caso esteja retonará o Head.
             if (aux.getNext() == null) {
 
                 return aux;
             } else {
                 aux = aux.getNext();
-
+                // irá percorre a lista encadeada até encontrar um nó em que o Next seja nulo, e então retorná o nó.
                 while (aux.getNext() != null) {
                     aux = aux.getNext();
 
                 }
-
+                // retorna o ultimo nó da lista.
                 return aux;
             }
         }

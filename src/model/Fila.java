@@ -1,68 +1,88 @@
 package model;
 
 public class Fila {
-    private Aluno Head;
+    private Aluno ptInicio;
+    private Aluno ptFim;
 
     protected Fila() {
-        Head = null;
+        ptInicio = null;
+        ptFim = null;
     }
 
     public static Fila criar() {
         return new Fila();
     }
 
-    public void Add(Fila fila, Aluno newNode) {
+    public void inserir(Fila fila, Aluno newNode) {
 
-        Aluno aux = Head;
-        if (Head == null) {
-            Head = newNode;
-            return;
+        if (ptInicio == ptFim && ptInicio == null) {
+            ptInicio = newNode;
+            ptInicio.setNext(newNode);
+            ptFim = newNode;
 
         } else {
-
-            if (aux.getNext() == null) {
+            Aluno aux = ptInicio;
+            if (aux.getNext() == ptFim) {
                 aux.setNext(newNode);
+                ptFim = newNode;
                 return;
 
             } else {
                 aux = aux.getNext();
 
-                while (aux.getNext() != null) {
+                while (aux.getNext() != ptFim) {
                     aux = aux.getNext();
                 }
 
                 aux.setNext(newNode);
+                ptFim = newNode;
             }
         }
     }
 
-    public Aluno pop(Fila fila) throws VazioException {
-        Aluno aux = Head;
+    public Aluno remover(Fila fila) throws VazioException {
+        Aluno aux = ptInicio;
 
-        if (Head == null) {
+        if (ptInicio == null) {
             throw new VazioException("A fila está vázia!");
 
         } else {
 
-            if (aux.getNext() == null) {
-                Head = null;
+            if (aux == ptFim) {
+                ptInicio = null;
+                ptFim = null;
                 return aux;
 
             } else {
-
-                Head = Head.getNext();
+                
+                if(aux.getNext() != ptFim) {
+                ptInicio = ptInicio.getNext();
                 return aux;
-
+                }else{
+                    ptInicio = ptFim;
+                    ptInicio.setNext(ptFim);
+                    return aux;
+                }
             }
         }
     }
 
-    public Aluno top(Fila fila) throws VazioException {
+    public Aluno listarPrimeiro(Fila fila) throws VazioException {
 
-        Aluno aux = Head;
-        if (Head == null) {
+        Aluno aux = ptInicio;
+        if (ptInicio == null) {
             throw new VazioException("A fila está vázia!");
 
+        } else {
+            return aux;
+        }
+    }
+
+    public Aluno listarUltimo(Fila fila) throws VazioException {
+
+        Aluno aux = ptFim;
+        if (aux == null) {
+            throw new VazioException("A fila está vázia!");
         } else {
             return aux;
         }
