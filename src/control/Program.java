@@ -39,30 +39,37 @@ public class Program {
                 switch (opcao) {
 
                 case 1:
+                    // Esse case adiciona aluno a pilha.
                     aluno = OpcaoExtensao.instanciarAluno(read);
                     pilha.push(pilha, aluno);
                     break;
                 case 2:
+                    //esse case mostra o topo da pilha.
                     aluno = pilha.top(pilha);
                     OpcaoExtensao.mostrarAluno(aluno);
                     break;
                 case 3:
+                    // esse case remove im aluno do topo da pilha.
                     aluno = pilha.pop(pilha);
                     OpcaoExtensao.mostrarAluno(aluno);
                     break;
                 case 4:
+                    // esse case inseri aluno a fila
                     aluno = OpcaoExtensao.instanciarAluno(read);
                     fila.inserir(fila, aluno);
                     break;
                 case 5:
+                    // esse case lista o primeiro aluno da fila
                     aluno = fila.listarPrimeiro(fila);
                     OpcaoExtensao.mostrarAluno(aluno);
                     break;
                 case 6:
+                    // esse case lista o ultimo aluno da fila
                     aluno = fila.listarUltimo(fila);
                     OpcaoExtensao.mostrarAluno(aluno);
                     break;
                 case 7:
+                    //esse case remove o aluno da fila
                     aluno = fila.remover(fila);
                     OpcaoExtensao.mostrarAluno(aluno);
                     break;

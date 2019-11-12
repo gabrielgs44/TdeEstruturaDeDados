@@ -1,11 +1,12 @@
 package model;
 
 public class Pilha {
-    private Aluno Head;
+    private Aluno head;
+    private Aluno topo;
 
     // método construtor protegio e garantindo que ao criar pilha, o Head será nulo.
     protected Pilha() {
-        Head = null;
+        head = null;
     }
 
     // Cria a pilha
@@ -16,79 +17,69 @@ public class Pilha {
     // método para adicionar um novo nó a Pilha encadeada.
     public void push(Pilha pilha, Aluno newNode) {
 
-        Aluno aux = Head;
+        Aluno aux = head;
 
         // Se pilha for vázia, simplesmente adiciona um novo nó;
         if (aux == null) {
-            Head = newNode;
+            head = newNode;
+            topo = newNode;
             return;
 
         } else {
-            aux = Head.getNext();
-            
-            // pecorre a lista encadeada até encontrar um nó com um next como nulo, para adicionar um novo nó.
-            while (aux.getNext() != null) {
-
-                aux = aux.getNext();
-            }
-            
-            // adiciona o nó na ultima posição.
-            aux.setNext(newNode);
-            return;
+           if(aux == topo) {
+               aux.setNext(newNode);
+               topo = newNode;
+               return;
+           }else {
+               topo.setNext(newNode);
+               topo = newNode;
+           }
         }
     }
     
     //método retorna o topo da pilha.
     public Aluno top(Pilha pilha) throws VazioException {
 
-        Aluno aux = Head;
+        Aluno aux = head;
 
         if (aux == null) {
             // esse if verifica se a pilha está vazia, caso esteja lançará uma exceção.
             throw new VazioException("A pilha está vázia!");
 
         } else {
-            
-            // verifica se o Next do primeiro nó nó está vázio, caso esteja retonará o Head.
-            if (aux.getNext() == null) {
-
-                return aux;
-            } else {
-                aux = aux.getNext();
-                // irá percorre a lista encadeada até encontrar um nó em que o Next seja nulo, e então retorná o nó.
-                while (aux.getNext() != null) {
-                    aux = aux.getNext();
-
-                }
-                // retorna o ultimo nó da lista.
-                return aux;
-            }
+            return topo;
         }
     }
 
     public Aluno pop(Pilha pilha) throws VazioException {
 
-        Aluno aux = Head;
-
+        Aluno aux = head;
+        
+        // verifica se a lista está vázia, caso esteja lançará uma exceção.
         if (aux == null) {
             throw new VazioException("A pilha está vázia!");
 
         } else {
-            if (aux.getNext() == null) {
-
-                Head = null;
+            // verifica se a lista tem apenas um nó, caso tenha irá remove-lo e retorna oq foi removido.
+            if (aux == topo) {
+                System.out.println("chegou aqui");
+                head = null;
+                topo = null;
                 return aux;
             } else {
-
-                aux = aux.getNext();
-
-                while (aux.getNext().getNext() != null) {
+                
+                // pecorre a lista até achar um nó que o next seja igual ao topo.
+                while (aux.getNext() != topo) {
 
                     aux = aux.getNext();
                 }
-
+                // Ao encontra-lo, irá salvar o elemento que será removido.
                 Aluno node = aux.getNext();
+                // Irá remover o ultimo elemento da lista.
                 aux.setNext(null);
+                // o topo receberá o auxiliar, que aponta pro penultimo elemento da lista.
+                topo = aux;
+                // retonará o elemento removido da lista.
                 return node;
             }
         }
