@@ -1,32 +1,11 @@
 package control;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import model.Aluno;
-import model.Pilha;
-import model.VazioException;
 
-public class OpcaoExtensao {
-    
-    public static void inserirNaPilha(Scanner read, Pilha pilha) throws VazioException{
-        
-        Aluno aluno = OpcaoExtensao.instanciarAluno(read);
-        pilha.push(pilha, aluno);
-        
-    }
-    
-    public static void mostrarTopoPilha(Scanner read, Pilha pilha) throws VazioException{
-        
-        Aluno aluno = pilha.top(pilha);
-        OpcaoExtensao.mostrarAluno(aluno);
-    }
-    
-    public static void removerPilha(Scanner read, Pilha pilha) throws VazioException{
-        
-        Aluno aluno = pilha.pop(pilha);
-        OpcaoExtensao.mostrarAluno(aluno);
-    }
-    
+public class OpcaoExtensao {  
     // método criado para mostrar o aluno na tela, foi criado para evitar repetição de código.
     public static void mostrarAluno(Aluno aluno) {
         System.out.println("matricula: " + aluno.getMatricula());
